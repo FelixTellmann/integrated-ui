@@ -164,6 +164,49 @@ export type LayoutProps = {
   content?: CSS.Content | CSS.PointerEvents[]
 }
 
+export type PseudoSelectorProps = {
+  _forwardClass: { className: string } & LayoutProps,
+  _hf: LayoutProps,
+  _hfa: LayoutProps,
+  _hfaa: LayoutProps,
+  _fa: LayoutProps,
+  _faa: LayoutProps,
+  _hover?: LayoutProps
+  _focus?: LayoutProps
+  _active?: LayoutProps
+  _activeLink?: LayoutProps
+  _after?: LayoutProps
+  _autofill?: LayoutProps
+  _before?: LayoutProps
+  _checked?: LayoutProps
+  _empty?: LayoutProps
+  _even?: LayoutProps
+  _expanded?: LayoutProps
+  _first?: LayoutProps
+  _focusVisible?: LayoutProps
+  _focusWithin?: LayoutProps
+  _fullScreen?: LayoutProps
+  _grabbed?: LayoutProps
+  _hidden?: LayoutProps
+  _highlighted?: LayoutProps
+  _indeterminate?: LayoutProps
+  _invalid?: LayoutProps
+  _last?: LayoutProps
+  _loading?: LayoutProps
+  _notFirst?: LayoutProps
+  _notLast?: LayoutProps
+  _odd?: LayoutProps
+  _placeholder?: LayoutProps
+  _pressed?: LayoutProps
+  _readOnly?: LayoutProps
+  _selected?: LayoutProps
+  _selection?: LayoutProps
+  _valid?: LayoutProps
+  _visited?: LayoutProps
+}
+
+export type CssProps = LayoutProps & PseudoSelectorProps
+
 const cfg = {
   space: [0, 4, 8, 12, 16, 24, 32, 36, 64],
   fontSize: [0, 12, 14, 16, 20, 24, 32, 48, 64],
@@ -519,6 +562,12 @@ const cssSelectors = {
 };
 
 const pseudoSelectors = {
+  _forwardClass: `&~, & ~`,
+  _hf: `&:hover, &[data-hover], &:focus, &[data-focus]`,
+  _hfa: `&:hover, &[data-hover], &:focus, &[data-focus], &:active, &[data-active]`,
+  _hfaa: `&:hover, &[data-hover], &:focus, &[data-focus], &:active, &[data-active], &.active`,
+  _fa: `&:focus, &[data-focus], &:active, &[data-active]`,
+  _faa: `&:focus, &[data-focus], &:active, &[data-active], &.active`,
   _active: "&:active, &[data-active]",
   _activeLink: "&[aria-current=page]",
   _after: "&::after",
@@ -590,6 +639,7 @@ function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, remBase 
   }
   
   return Object.entries(parsedCssProps).reduce((acc, [key, val]) => {
+    if (key === "className") return acc;
     if (breakpoint === 0) {
       if ((key === "display" || key === "d") && getResponsiveValue(val, breakpoint) === "flex") {
         acc += `display:-webkit-box;`;
@@ -642,18 +692,19 @@ export function useJsxSystem(props: any, config = cfg): { id?: string; styles?: 
     return a;
   }, {}), [props]);
   
-  const base = config.breakpoints.map((bp, i) => createStyleString(cssProps, i, config.remBase) && `${i !== 0
-                                                                                                      ? `@media screen and (min-width: ${bp}px){`
-                                                                                                      : ``}&{${createStyleString(cssProps, i, config.remBase)}}${i !== 0
-                                                                                                                                                                 ? `}`
-                                                                                                                                                                 : ""}`).join("");
-  const pseudo = Object.entries(pseudoProps).map(([k, v]) => config.breakpoints.map((bp, i) => createStyleString(v, i, config.remBase) && `${i !== 0
-                                                                                                                                             ? `@media screen and (min-width: ${bp}px){`
-                                                                                                                                             : ``}${pseudoSelectors[k]}{${createStyleString(v, i, config.remBase)}}${i !== 0
-                                                                                                                                                                                                                     ? `}`
-                                                                                                                                                                                                                     : ""}`).join("")).join("");
+  const base = config.breakpoints.map((bp, i) => createStyleString(cssProps, i, config.remBase)
+    && `${i !== 0
+          ? `@media screen and (min-width: ${bp}px){`
+          : ``}&{${createStyleString(cssProps, i, config.remBase)}}${i !== 0 ? `}` : ""}`).join("");
+  const pseudo = Object.entries(pseudoProps).map(([k, v]) => config.breakpoints.map((bp, i) => createStyleString(v, i, config.remBase)
+    && `${i !== 0
+          ? `@media screen and (min-width: ${bp}px){`
+          : ``}${pseudoSelectors[k]}{${createStyleString(v, i, config.remBase)}}${i !== 0 ? `}` : ""}`).join("")).join("");
   const id = (base + pseudo) !== "" ? String(hashString(base + pseudo)) : undefined;
-  const style = (base + pseudo).replace(/&/g, `.jsx-${id}`);
+  let style = (base + pseudo).replace(/&/g, `.jsx-${id}`);
+  if (props._forwardClass && props._forwardClass.className) {
+    style = style.replace(/~/g, `.${props._forwardClass.className.replace(/^\./, "")}`);
+  }
   
   // eslint-disable-next-line react/jsx-pascal-case
   return { id: id || undefined, styles: id ? style : undefined, filteredProps };
