@@ -179,6 +179,7 @@ export type PseudoSelectorProps = {
   _hover?: LayoutProps
   _focus?: LayoutProps
   _active?: LayoutProps
+  _activeClass?: LayoutProps
   _activeLink?: LayoutProps
   _after?: LayoutProps
   _autofill?: LayoutProps
@@ -593,6 +594,7 @@ const pseudoSelectors = {
   _fa: `&:focus, &[data-focus], &:active, &[data-active]`,
   _faa: `&:focus, &[data-focus], &:active, &[data-active], &.active`,
   _active: "&:active, &[data-active]",
+  _activeClass: `&.active`,
   _activeLink: "&[aria-current=page]",
   _after: "&::after",
   _autofill: "&:-webkit-autofill",
