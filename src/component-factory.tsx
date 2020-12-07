@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-fragments */
 import cn from "classnames";
 import React, { createElement, FC, forwardRef, Fragment } from "react";
+import _JSXStyle from "styled-jsx/style";
 import { LayoutProps, useCreateStyles } from "./use-jsx-system";
 
+\
 export type PseudoSelectorProps = {
   _hover?: LayoutProps
   _active?: LayoutProps
@@ -53,10 +55,10 @@ export const Factory = (as = `div`) => forwardRef<FC, FactoryProps & CssProps>((
   children,
   ...props
 }: FactoryProps & CssProps, ref) => {
-  const { id, styles, filteredProps } = useCreateStyles(props);
+  const { id, styles, filteredProps, raw } = useCreateStyles(props);
   return <Fragment>
     {createElement(type, { className: cn(id, className), ...filteredProps, ref }, children)}
-    {styles}
+     <_JSXStyle id={id.replace('jsx-','')}>{raw}</_JSXStyle>
   </Fragment>;
 });
 
