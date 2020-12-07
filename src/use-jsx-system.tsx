@@ -544,6 +544,10 @@ const cssSelectors = {
     "-webkit-transition": "",
     transition: ""
   },
+  transitionDelay: ``,
+  transitionDuration: ``,
+  TransitionProperty: ``,
+  TransitionTimingFunction: ``,
   transform: {
     "-ms-transform": "",
     "-webkit-transform": "",
