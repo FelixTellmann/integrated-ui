@@ -18,6 +18,7 @@
     "isolatedModules": true,
     "jsx": "react",
     "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment",
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true
   },
