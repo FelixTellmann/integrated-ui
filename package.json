@@ -1,6 +1,6 @@
 {
   "name": "integrated-ui",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "license": "MIT",
   "main": "dist/integrated-ui.js",
   "umd:main": "dist/integrated-ui.umd.js",
