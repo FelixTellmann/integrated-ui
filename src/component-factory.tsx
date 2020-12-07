@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-fragments */
 import cn from "classnames";
-import React, { createElement, FC, forwardRef, Fragment } from "react";
+import React, { createElement, FC, Fragment } from "react";
 import _JSXStyle from "styled-jsx/style";
 import { LayoutProps, useCreateStyles } from "./use-jsx-system";
 
-\
 export type PseudoSelectorProps = {
   _hover?: LayoutProps
   _active?: LayoutProps
@@ -49,18 +48,13 @@ type FactoryProps = {
   ref?
 }
 
-export const Factory = (as = `div`) => forwardRef<FC, FactoryProps & CssProps>(({
-  type = as,
-  className,
-  children,
-  ...props
-}: FactoryProps & CssProps, ref) => {
+export const Factory = (as: string): FC<FactoryProps & CssProps>  => ({  type = as,  className,  children,  ...props }) => {
   const { id, styles, filteredProps, raw } = useCreateStyles(props);
   return <Fragment>
-    {createElement(type, { className: cn(id, className), ...filteredProps, ref }, children)}
-     <_JSXStyle id={id.replace('jsx-','')}>{raw}</_JSXStyle>
+    {createElement(type, { className: cn(id, className), ...filteredProps }, children)}
+    <_JSXStyle id={id.replace('jsx-','')}>{raw}</_JSXStyle>
   </Fragment>;
-});
+};
 
 export const A: FC<FactoryProps & CssProps> = Factory("a");
 export const Article: FC<FactoryProps & CssProps> = Factory("article");
