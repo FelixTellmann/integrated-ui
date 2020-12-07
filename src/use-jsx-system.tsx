@@ -1,7 +1,6 @@
 import { Property as CSS } from "csstype";
 import React, { useMemo } from "react";
 import hashString from "string-hash";
-import _JSXStyle from "styled-jsx/style";
 
 export type LayoutProps = {
   margin?: (CSS.Margin | number) | (CSS.Margin | number)[]
@@ -623,7 +622,7 @@ function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, remBase 
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function useCreateStyles(props: any, config = cfg): { id?: string; styles?: JSX.Element; filteredProps?, raw?: string } {
+export function useJsxSystem(props: any, config = cfg): { id?: string; styles?: string; filteredProps? } {
   const filteredProps = useMemo(() => Object.entries(props).reduce((a, [k, v]) => {
     if (cssSelectors[k] === undefined && pseudoSelectors[k] === undefined) {
       return { ...a, [k]: v };
@@ -643,11 +642,19 @@ export function useCreateStyles(props: any, config = cfg): { id?: string; styles
     return a;
   }, {}), [props]);
   
-  const base = config.breakpoints.map((bp, i) => createStyleString(cssProps, i, config.remBase) && `${i !== 0 ?  `@media screen and (min-width: ${bp}px){`:``}&{${createStyleString(cssProps, i, config.remBase)}}${i !== 0 ?  `}`:''}`).join('')
-  const pseudo = Object.entries(pseudoProps).map(([k, v]) => config.breakpoints.map((bp, i) => createStyleString(v, i, config.remBase) && `${i !== 0 ?  `@media screen and (min-width: ${bp}px){`:``}${pseudoSelectors[k]}{${createStyleString(v, i, config.remBase)}}${i !== 0 ?  `}`:''}`).join('')).join('');
+  const base = config.breakpoints.map((bp, i) => createStyleString(cssProps, i, config.remBase) && `${i !== 0
+                                                                                                      ? `@media screen and (min-width: ${bp}px){`
+                                                                                                      : ``}&{${createStyleString(cssProps, i, config.remBase)}}${i !== 0
+                                                                                                                                                                 ? `}`
+                                                                                                                                                                 : ""}`).join("");
+  const pseudo = Object.entries(pseudoProps).map(([k, v]) => config.breakpoints.map((bp, i) => createStyleString(v, i, config.remBase) && `${i !== 0
+                                                                                                                                             ? `@media screen and (min-width: ${bp}px){`
+                                                                                                                                             : ``}${pseudoSelectors[k]}{${createStyleString(v, i, config.remBase)}}${i !== 0
+                                                                                                                                                                                                                     ? `}`
+                                                                                                                                                                                                                     : ""}`).join("")).join("");
   const id = (base + pseudo) !== "" ? String(hashString(base + pseudo)) : undefined;
   const style = (base + pseudo).replace(/&/g, `.jsx-${id}`);
   
   // eslint-disable-next-line react/jsx-pascal-case
-  return { id: id ? `jsx-${id}` : undefined, styles: id ? <_JSXStyle id={id}>{style}</_JSXStyle> : undefined, filteredProps, raw: style }
+  return { id: id || undefined, styles: id ? style : undefined, filteredProps };
 }
