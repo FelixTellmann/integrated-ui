@@ -15,9 +15,9 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "jsxFactory": "React.createElement",
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true
   },
