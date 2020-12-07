@@ -139,6 +139,7 @@ export type LayoutProps = {
   visibility?: CSS.Visibility | CSS.Visibility[]
   fontFamily?: CSS.FontFamily | CSS.FontFamily[]
   fontSize?: (CSS.FontSize | number) | (CSS.FontSize | number)[]
+  fz?: (CSS.FontSize | number) | (CSS.FontSize | number)[]
   fontWeight?: (CSS.FontWeight | number) | (CSS.FontWeight | number)[]
   lineHeight?: (CSS.LineHeight | number) | (CSS.LineHeight | number)[]
   letterSpacing?: (CSS.LetterSpacing | number) | (CSS.LetterSpacing | number)[]
@@ -514,6 +515,7 @@ const cssSelectors = {
   visibility: "",
   fontFamily: "",
   fontSize: "fontSize",
+  fz: { fontSize: "fontSize" },
   fontWeight: "",
   lineHeight: "",
   letterSpacing: "",
