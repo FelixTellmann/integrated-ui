@@ -1,0 +1,47 @@
+{
+  "name": "integrated-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/integrated-ui.js",
+  "umd:main": "dist/integrated-ui.umd.js",
+  "module": "dist/integrated-ui.m.js",
+  "types": "dist/index.d.ts",
+  "source": "src/index.tsx",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepublishOnly": "npm run build",
+    "test": "jest --verbose --coverage --silent",
+    "test:watch": "jest --watch --runInBand --silent",
+    "prebuild": "rimraf dist",
+    "bundle": "rimraf dist/ && microbundle -o dist/ --jsx React.createElement --sourcemap false --target web"
+  },
+  "dependencies": {
+    "@types/node": "^14.14.10",
+    "@types/react": "^17.0.0",
+    "@types/styled-jsx": "^2.2.8",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/parser": "^4.8.2",
+    "babel-eslint": "^10.1.0",
+    "classnames": "^2.2.6",
+    "csstype": "^3.0.5",
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "next": "^10.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "string-hash": "^1.1.3",
+    "typescript": "^4.1.2"
+  },
+  "devDependencies": {
+    "microbundle": "^0.12.4",
+    "rimraf": "^3.0.2"
+  }
+}
