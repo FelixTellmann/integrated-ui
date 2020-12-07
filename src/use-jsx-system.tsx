@@ -184,6 +184,7 @@ export type PseudoSelectorProps = {
   _even?: LayoutProps
   _expanded?: LayoutProps
   _first?: LayoutProps
+  _firstChild?: LayoutProps
   _focusVisible?: LayoutProps
   _focusWithin?: LayoutProps
   _fullScreen?: LayoutProps
@@ -193,6 +194,7 @@ export type PseudoSelectorProps = {
   _indeterminate?: LayoutProps
   _invalid?: LayoutProps
   _last?: LayoutProps
+  _lastChild?: LayoutProps
   _loading?: LayoutProps
   _notFirst?: LayoutProps
   _notLast?: LayoutProps
@@ -580,6 +582,7 @@ const pseudoSelectors = {
   _even: "&:nth-of-type(even)",
   _expanded: "&[aria-expanded=true], &[data-expanded]",
   _first: "&:first-of-type",
+  _firstChild: "& :first-child",
   _focus: "&:focus, &[data-focus]",
   _focusVisible: "&:focus-visible",
   _focusWithin: "&:focus-within",
@@ -591,6 +594,7 @@ const pseudoSelectors = {
   _indeterminate: "&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]",
   _invalid: "&[aria-invalid=true], &[data-invalid]",
   _last: "&:last-of-type",
+  _lastChild: "& :last-child",
   _loading: "&[data-loading], &[aria-busy=true]",
   _notFirst: "&:not(:first-of-type)",
   _notLast: "&:not(:last-of-type)",
