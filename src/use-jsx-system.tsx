@@ -564,7 +564,7 @@ const cssSelectors = {
 };
 
 const pseudoSelectors = {
-  _forwardSelector: `&~, & ~`,
+  _forwardSelector: `& ~`,
   _hf: `&:hover, &[data-hover], &:focus, &[data-focus]`,
   _hfa: `&:hover, &[data-hover], &:focus, &[data-focus], &:active, &[data-active]`,
   _hfaa: `&:hover, &[data-hover], &:focus, &[data-focus], &:active, &[data-active], &.active`,
@@ -708,6 +708,5 @@ export function useJsxSystem(props: any, config = cfg): { id?: string; styles?: 
     style = style.replace(/~/g, props._forwardSelector.selector);
   }
   
-  // eslint-disable-next-line react/jsx-pascal-case
   return { id: id || undefined, styles: id ? style : undefined, filteredProps };
 }
