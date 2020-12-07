@@ -705,7 +705,7 @@ export function useJsxSystem(props: any, config = cfg): { id?: string; styles?: 
   const id = (base + pseudo) !== "" ? String(hashString(base + pseudo)) : undefined;
   let style = (base + pseudo).replace(/&/g, `.jsx-${id}`);
   if (props._forwardSelector && props._forwardSelector.selector) {
-    style = style.replace(/~/g, `.${props._forwardSelector.selector.replace(/^\./, "")}`);
+    style = style.replace(/~/g, props._forwardSelector.selector);
   }
   
   // eslint-disable-next-line react/jsx-pascal-case
