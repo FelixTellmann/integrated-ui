@@ -1,5 +1,5 @@
 import { Property as CSS } from "csstype";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import hashString from "string-hash";
 import _JSXStyle from "styled-jsx/style";
 
