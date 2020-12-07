@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { createElement, ElementType, FC, forwardRef } from "react";
+import React, { createElement, ElementType, FC, forwardRef } from "react";
 import { CssProps, useCreateStyles } from "./use-jsx-system";
 
 type FactoryProps = {

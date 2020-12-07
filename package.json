@@ -14,7 +14,7 @@
     "test": "jest --verbose --coverage --silent",
     "test:watch": "jest --watch --runInBand --silent",
     "prebuild": "rimraf dist",
-    "bundle": "rimraf dist/ && microbundle -o dist/ --jsx React.createElement --sourcemap false --target web"
+    "build": "microbundle -o dist/ --jsx React.createElement --sourcemap false --target web"
   },
   "dependencies": {
     "@types/node": "^14.14.10",
