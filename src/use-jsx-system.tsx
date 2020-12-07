@@ -166,7 +166,7 @@ export type LayoutProps = {
 }
 
 export type PseudoSelectorProps = {
-  _forwardClass?: { className: string } & LayoutProps,
+  _forwardSelector?: { selector: string } & LayoutProps,
   _hf?: LayoutProps,
   _hfa?: LayoutProps,
   _hfaa?: LayoutProps,
@@ -564,7 +564,7 @@ const cssSelectors = {
 };
 
 const pseudoSelectors = {
-  _forwardClass: `&~, & ~`,
+  _forwardSelector: `&~, & ~`,
   _hf: `&:hover, &[data-hover], &:focus, &[data-focus]`,
   _hfa: `&:hover, &[data-hover], &:focus, &[data-focus], &:active, &[data-active]`,
   _hfaa: `&:hover, &[data-hover], &:focus, &[data-focus], &:active, &[data-active], &.active`,
@@ -641,7 +641,7 @@ function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, remBase 
   }
   
   return Object.entries(parsedCssProps).reduce((acc, [key, val]) => {
-    if (key === "className") return acc;
+    if (key === "selector") return acc;
     if (breakpoint === 0) {
       if ((key === "display" || key === "d") && getResponsiveValue(val, breakpoint) === "flex") {
         acc += `display:-webkit-box;`;
@@ -704,8 +704,8 @@ export function useJsxSystem(props: any, config = cfg): { id?: string; styles?: 
           : ``}${pseudoSelectors[k]}{${createStyleString(v, i, config.remBase)}}${i !== 0 ? `}` : ""}`).join("")).join("");
   const id = (base + pseudo) !== "" ? String(hashString(base + pseudo)) : undefined;
   let style = (base + pseudo).replace(/&/g, `.jsx-${id}`);
-  if (props._forwardClass && props._forwardClass.className) {
-    style = style.replace(/~/g, `.${props._forwardClass.className.replace(/^\./, "")}`);
+  if (props._forwardSelector && props._forwardSelector.selector) {
+    style = style.replace(/~/g, `.${props._forwardSelector.selector.replace(/^\./, "")}`);
   }
   
   // eslint-disable-next-line react/jsx-pascal-case
