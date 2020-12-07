@@ -336,81 +336,81 @@ const cssSelectors = {
   },
   verticalAlign: "",
   justifyContent: {
-    justifyContent: "",
+    "-ms-flex-pack": "",
     "-webkit-box-pack": "",
-    "-ms-flex-pack": ""
+    justifyContent: ""
   },
   justify: {
-    justifyContent: "",
     "-webkit-box-pack": "",
-    "-ms-flex-pack": ""
+    "-ms-flex-pack": "",
+    justifyContent: ""
   },
   alignItems: {
-    alignItems: "",
+    "-ms-flex-align": "",
     "-webkit-box-align": "",
-    "-ms-flex-align": ""
+    alignItems: ""
   },
   align: {
-    alignItems: "",
+    "-ms-flex-align": "",
     "-webkit-box-align": "",
-    "-ms-flex-align": ""
+    alignItems: ""
   },
   alignContent: {
-    alignContent: "",
-    "-ms-flex-line-pack": ""
+    "-ms-flex-line-pack": "",
+    alignContent: ""
   },
   flexDirection: {
-    flexDirection: "",
+    "-ms-flex-direction": "",
     "-webkit-box-orient": "",
     "-webkit-box-direction": "",
-    "-ms-flex-direction": ""
+    flexDirection: ""
   },
   direction: {
-    flexDirection: "",
+    "-ms-flex-direction": "",
     "-webkit-box-orient": "",
     "-webkit-box-direction": "",
-    "-ms-flex-direction": ""
+    flexDirection: ""
   },
   flex: {
-    flex: "",
+    "-mx-flex": "",
     "webkit-box-flex": "",
     "webkit-flex": "",
-    "-mx-flex": ""
+    flex: ""
   },
   flexWrap: {
-    flexWrap: "",
-    "-ms-flex-wrap": ""
+    "-ms-flex-wrap": "",
+    flexWrap: ""
   },
   wrap: {
-    flexWrap: "",
-    "-ms-flex-wrap": ""
+    "-ms-flex-wrap": "",
+    flexWrap: ""
   },
   flexBasis: {
-    flexBasis: "",
+    "-ms-flex-preferred-size": "",
     "-mx-flex": "",
-    "-ms-flex-preferred-size": ""
+    flexBasis: ""
   },
   flexGrow: {
-    flexGrow: "",
+    "-ms-flex-positive": "",
     "-webkit-box-flex": "",
-    "-ms-flex-positive": ""
+    flexGrow: ""
   },
   flexShrink: {
-    flexShrink: "",
-    "-ms-flex-negative": ""
+    "-ms-flex-negative": "",
+    flexShrink: ""
   },
   alignSelf: {
-    alignSelf: "",
-    "-ms-grid-row-align": ""
+    "-ms-grid-row-align": "",
+    alignSelf: ""
   },
   justifySelf: {
-    justifySelf: "",
-    "-ms-grid-column-align": ""
+    "-ms-grid-column-align": "",
+    justifySelf: ""
   },
   order: {
-    order: "",
+    "-ms-flex-order": "",
     "-webkit-box-ordinal-group": "",
-    "-ms-flex-order": ""
+    order: ""
   },
   gridGap: "space",
   gridRowGap: "space",
@@ -422,12 +422,12 @@ const cssSelectors = {
   gridAutoRows: "",
   gridAutoColumns: "",
   gridTemplateRows: {
-    gridTemplateRows: "",
-    "-ms-grid-rows": ""
+    "-ms-grid-rows": "",
+    gridTemplateRows: ""
   },
   gridTemplateColumns: {
-    gridTemplateColumns: "",
-    "-ms-grid-columns": ""
+    "-ms-grid-columns": "",
+    gridTemplateColumns: ""
   },
   gridTemplateAreas: "",
   position: "",
@@ -447,8 +447,8 @@ const cssSelectors = {
   opacity: "",
   backgroundAttachment: "",
   backgroundClip: {
-    backgroundClip: "",
-    "-webkit-background-clip": ""
+    "-webkit-background-clip": "",
+    backgroundClip: ""
   },
   backgroundColor: "color",
   backgroundImage: "",
@@ -457,12 +457,12 @@ const cssSelectors = {
   backgroundPositionY: "space",
   backgroundSize: "space",
   backdropFilter: {
-    backdropFilter: "",
-    "-webkit-backdropFilter": ""
+    "-webkit-backdropFilter": "",
+    backdropFilter: ""
   },
   boxShadow: {
-    boxShadow: "",
-    "-webkit-box-shadow": ""
+    "-webkit-box-shadow": "",
+    boxShadow: ""
   },
   outline: "",
   outlineColor: "color",
@@ -485,35 +485,35 @@ const cssSelectors = {
   wordBreak: "",
   fill: "",
   filter: {
-    filter: "",
-    "-webkit-filter": ""
+    "-webkit-filter": "",
+    filter: ""
   },
   stroke: "",
   transition: {
-    transition: "",
     "-o-transition": "",
-    "-webkit-transition": ""
+    "-webkit-transition": "",
+    transition: ""
   },
   transform: {
-    transform: "",
     "-ms-transform": "",
-    "-webkit-transform": ""
+    "-webkit-transform": "",
+    transform: ""
   },
   cursor: "",
   resize: "",
   objectFit: {
-    objectFit: "",
-    "-o-object-fit": ""
+    "-o-object-fit": "",
+    objectFit: ""
   },
   userSelect: {
-    userSelect: "",
     "-webkit-user-select": "",
     "-moz-user-select": "",
-    "-ms-user-select": ""
+    "-ms-user-select": "",
+    userSelect: ""
   },
   appearance: {
-    appearance: "",
-    "-webkit-appearance": ""
+    "-webkit-appearance": "",
+    appearance: ""
   },
   pointerEvents: "",
   content: ""
