@@ -205,7 +205,8 @@ export type CssProps = LayoutProps & PseudoSelectorProps
 const cfg = {
   space: [0, 4, 8, 12, 16, 24, 32, 36, 64],
   fontSize: [0, 12, 14, 16, 20, 24, 32, 48, 64],
-  breakpoints: [0, 600, 900, 1200]
+  breakpoints: [0, 600, 900, 1200],
+  remBase: 10
 };
 
 const cssSelectors = {
@@ -590,7 +591,7 @@ const pseudoSelectors = {
   _visited: "&:visited"
 };
 
-function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0): string {
+function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, remBase = 10): string {
   function toCssProperty(JsSyntax: string): string {
     return JsSyntax.replace(/([A-Z])/g, `-$1`).toLowerCase();
   }
@@ -601,16 +602,16 @@ function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0): string 
   
   function parseCssSizes(val: number | string, type: "" | "fontSize" | "space"): string {
     if (typeof val === "string") {
-      return val.replace(/([\d.]+)px/gi, (match) => `${parseFloat(match) / 10}rem`);
+      return val.replace(/([\d.]+)px/gi, (match) => `${parseFloat(match) / remBase}rem`);
     }
     if (typeof val === "number" && val >= 0 && val < cfg[type].length) {
-      return `${cfg[type][val] / 10}rem`;
+      return `${cfg[type][val] / remBase}rem`;
     }
     if (typeof val === "number" && val < 0 && val * -1 < cfg[type].length) {
-      return `-${cfg[type][val * -1] / 10}rem`;
+      return `-${cfg[type][val * -1] / remBase}rem`;
     }
     if (typeof val === "number") {
-      return `${val / 10}rem`;
+      return `${val / remBase}rem`;
     }
   }
   
@@ -679,8 +680,8 @@ export function useCreateStyles(props: any, config = cfg): { id?: string; styles
     return a;
   }, {}), [props]);
   
-  const base = config.breakpoints.map((bp, i) => createStyleString(cssProps, i) && `${i !== 0 ?  `@media screen and (min-width: ${bp}px){`:``}&{${createStyleString(cssProps, i)}}${i !== 0 ?  `}`:''}`).join('')
-  const pseudo = Object.entries(pseudoProps).map(([k, v]) => config.breakpoints.map((bp, i) => createStyleString(v, i) && `${i !== 0 ?  `@media screen and (min-width: ${bp}px){`:``}${pseudoSelectors[k]}{${createStyleString(v, i)}}${i !== 0 ?  `}`:''}`).join('')).join('');
+  const base = config.breakpoints.map((bp, i) => createStyleString(cssProps, i, config.remBase) && `${i !== 0 ?  `@media screen and (min-width: ${bp}px){`:``}&{${createStyleString(cssProps, i, config.remBase)}}${i !== 0 ?  `}`:''}`).join('')
+  const pseudo = Object.entries(pseudoProps).map(([k, v]) => config.breakpoints.map((bp, i) => createStyleString(v, i, config.remBase) && `${i !== 0 ?  `@media screen and (min-width: ${bp}px){`:``}${pseudoSelectors[k]}{${createStyleString(v, i, config.remBase)}}${i !== 0 ?  `}`:''}`).join('')).join('');
   const id = (base + pseudo) !== "" ? String(hashString(base + pseudo)) : undefined;
   const style = (base + pseudo).replace(/&/g, `.jsx-${id}`);
   
