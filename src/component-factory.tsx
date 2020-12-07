@@ -40,7 +40,6 @@ export type PseudoSelectorProps = {
 
 export type CssProps = LayoutProps & PseudoSelectorProps
 
-
 type FactoryProps = {
   className?: string
   type?: string

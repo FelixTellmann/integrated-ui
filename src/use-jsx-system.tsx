@@ -623,7 +623,7 @@ function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, remBase 
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function useCreateStyles(props: any, config = cfg): { id?: string; styles?: JSX.Element; filteredProps? } {
+export function useCreateStyles(props: any, config = cfg): { id?: string; styles?: JSX.Element; filteredProps?, raw?: string } {
   const filteredProps = useMemo(() => Object.entries(props).reduce((a, [k, v]) => {
     if (cssSelectors[k] === undefined && pseudoSelectors[k] === undefined) {
       return { ...a, [k]: v };
@@ -649,5 +649,5 @@ export function useCreateStyles(props: any, config = cfg): { id?: string; styles
   const style = (base + pseudo).replace(/&/g, `.jsx-${id}`);
   
   // eslint-disable-next-line react/jsx-pascal-case
-  return { id: id ? `jsx-${id}` : undefined, styles: id ? <_JSXStyle id={id}>{style}</_JSXStyle> : undefined, filteredProps }
+  return { id: id ? `jsx-${id}` : undefined, styles: id ? <_JSXStyle id={id}>{style}</_JSXStyle> : undefined, filteredProps, raw: style }
 }
