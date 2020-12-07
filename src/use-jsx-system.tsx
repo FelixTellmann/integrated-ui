@@ -165,12 +165,12 @@ export type LayoutProps = {
 }
 
 export type PseudoSelectorProps = {
-  _forwardClass: { className: string } & LayoutProps,
-  _hf: LayoutProps,
-  _hfa: LayoutProps,
-  _hfaa: LayoutProps,
-  _fa: LayoutProps,
-  _faa: LayoutProps,
+  _forwardClass?: { className: string } & LayoutProps,
+  _hf?: LayoutProps,
+  _hfa?: LayoutProps,
+  _hfaa?: LayoutProps,
+  _fa?: LayoutProps,
+  _faa?: LayoutProps,
   _hover?: LayoutProps
   _focus?: LayoutProps
   _active?: LayoutProps
