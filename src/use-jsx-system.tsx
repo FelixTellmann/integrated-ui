@@ -605,10 +605,10 @@ function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, remBase 
       }
     } else if (Array.isArray(val) && val.length - 1 >= breakpoint) {
       if ((key === "display" || key === "d") && getResponsiveValue(val, breakpoint) === "flex") {
-        acc += `${toCssProperty(key)}:webkit-box;`;
-        acc += `${toCssProperty(key)}:-webkit-flex;`;
-        acc += `${toCssProperty(key)}:-ms-flexbox;`;
-        acc += `${toCssProperty(key)}:flex;`;
+        acc += `display:-webkit-box;`;
+        acc += `display:-webkit-flex;`;
+        acc += `display:-ms-flexbox;`;
+        acc += `display:flex;`;
       } else if (typeof cssSelectors[key] === "string") {
         acc += `${toCssProperty(key)}:${toCssValue(cssSelectors[key], getResponsiveValue(val, breakpoint))};`;
       } else if (cssSelectors[key] !== undefined) {
