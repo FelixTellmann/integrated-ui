@@ -544,10 +544,22 @@ const cssSelectors = {
     "-webkit-transition": "",
     transition: ""
   },
-  transitionDelay: ``,
-  transitionDuration: ``,
-  TransitionProperty: ``,
-  TransitionTimingFunction: ``,
+  transitionDelay: {
+    "-webkit-transition-delay": ``,
+    transitionDelay: ""
+  },
+  transitionDuration:{
+    "-webkit-transition-duration": ``,
+    transitionDuration: ""
+  },
+  TransitionProperty: {
+    "-webkit-transition-property": ``,
+    TransitionProperty: ""
+  },
+  TransitionTimingFunction: {
+    "-webkit-transition-timing-function": ``,
+    TransitionTimingFunction: ""
+  },
   transform: {
     "-ms-transform": "",
     "-webkit-transform": "",
