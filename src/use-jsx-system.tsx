@@ -96,7 +96,7 @@ export type LayoutProps = {
   alignSelf?: CSS.AlignSelf | CSS.AlignSelf[]
   justifySelf?: CSS.JustifySelf | CSS.JustifySelf[]
   order?: (CSS.Order | number) | (CSS.Order | number)[]
-  gridGap?: CSS.GridGap | CSS.GridGap[]
+  gridGap?: (CSS.GridGap | number) | (CSS.GridGap[] | number)[]
   gridRowGap?: CSS.GridRowGap | CSS.GridRowGap[]
   gridColumnGap?: CSS.GridColumnGap | CSS.GridColumnGap[]
   gridColumn?: CSS.GridColumn | CSS.GridColumn[]
