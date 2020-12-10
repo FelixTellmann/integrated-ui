@@ -647,10 +647,10 @@ function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, remBase 
     if (typeof val === "string") {
       return val.replace(/([\d.]+)px/gi, (match) => `${parseFloat(match) / remBase}rem`);
     }
-    if (typeof val === "number" && val >= 0 && val < cfg[type].length) {
+    if (typeof val === "number" && val >= 0 && val < cfg[type].length && val % 1 === 0) {
       return `${cfg[type][val] / remBase}rem`;
     }
-    if (typeof val === "number" && val < 0 && val * -1 < cfg[type].length) {
+    if (typeof val === "number" && val < 0 && val * -1 < cfg[type].length && val % 1 === 0) {
       return `-${cfg[type][val * -1] / remBase}rem`;
     }
     if (typeof val === "number") {
