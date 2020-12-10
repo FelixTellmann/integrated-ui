@@ -97,6 +97,7 @@ export type LayoutProps = {
   justifySelf?: CSS.JustifySelf | CSS.JustifySelf[]
   order?: (CSS.Order | number) | (CSS.Order | number)[]
   gridGap?: (CSS.GridGap | number) | (CSS.GridGap | number)[]
+  gap?: (CSS.GridGap | number) | (CSS.GridGap | number)[]
   gridRowGap?: CSS.GridRowGap | CSS.GridRowGap[]
   gridColumnGap?: CSS.GridColumnGap | CSS.GridColumnGap[]
   gridColumn?: CSS.GridColumn | CSS.GridColumn[]
@@ -141,6 +142,7 @@ export type LayoutProps = {
   fontSize?: (CSS.FontSize | number) | (CSS.FontSize | number)[]
   fz?: (CSS.FontSize | number) | (CSS.FontSize | number)[]
   fontWeight?: (CSS.FontWeight | number) | (CSS.FontWeight | number)[]
+  fw?: (CSS.FontWeight | number) | (CSS.FontWeight | number)[]
   lineHeight?: (CSS.LineHeight | number) | (CSS.LineHeight | number)[]
   letterSpacing?: (CSS.LetterSpacing | number) | (CSS.LetterSpacing | number)[]
   textAlign?: CSS.TextAlign | CSS.TextAlign[]
@@ -463,6 +465,7 @@ const cssSelectors = {
     order: ""
   },
   gridGap: "space",
+  gap: { gridGap: `gridGap` },
   gridRowGap: "space",
   gridColumnGap: "space",
   gridColumn: "",
@@ -524,6 +527,7 @@ const cssSelectors = {
   fontSize: "fontSize",
   fz: { fontSize: "fontSize" },
   fontWeight: "",
+  fw: { fontWeight: "fontWeight" },
   lineHeight: "",
   letterSpacing: "",
   textAlign: "",
