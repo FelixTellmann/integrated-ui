@@ -217,7 +217,7 @@ export type PseudoSelectorProps = {
 
 export type CssProps = LayoutProps & PseudoSelectorProps
 
-const cfg = {
+const defaultConfig = {
   space: [0, 4, 8, 12, 16, 24, 32, 36, 64],
   fontSize: [0, 12, 14, 16, 20, 24, 32, 48, 64],
   breakpoints: [0, 600, 900, 1200],
@@ -553,7 +553,7 @@ const cssSelectors = {
     "-webkit-transition-delay": ``,
     transitionDelay: ""
   },
-  transitionDuration:{
+  transitionDuration: {
     "-webkit-transition-duration": ``,
     transitionDuration: ""
   },
@@ -634,7 +634,7 @@ const pseudoSelectors = {
   _visited: "&:visited"
 };
 
-function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, remBase = 10): string {
+function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, { remBase, ...cfg }): string {
   function toCssProperty(JsSyntax: string): string {
     return JsSyntax.replace(/([A-Z])/g, `-$1`).toLowerCase();
   }
@@ -704,7 +704,13 @@ function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, remBase 
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function useJsxSystem(props: any, config = cfg): { id?: string; styles?: string; filteredProps? } {
+export function useJsxSystem(props: any, {
+  breakpoints = defaultConfig.breakpoints,
+  remBase = defaultConfig.remBase,
+  space = defaultConfig.space,
+  fontSize = defaultConfig.fontSize
+}): { id?: string; styles?: string; filteredProps? } {
+  const config = { space, fontSize, breakpoints, remBase };
   const filteredProps = useMemo(() => Object.entries(props).reduce((a, [k, v]) => {
     if (cssSelectors[k] === undefined && pseudoSelectors[k] === undefined) {
       return { ...a, [k]: v };
@@ -724,14 +730,14 @@ export function useJsxSystem(props: any, config = cfg): { id?: string; styles?: 
     return a;
   }, {}), [props]);
   
-  const base = config.breakpoints.map((bp, i) => createStyleString(cssProps, i, config.remBase)
+  const base = breakpoints.map((bp, i) => createStyleString(cssProps, i, config)
     && `${i !== 0
           ? `@media screen and (min-width: ${bp}px){`
-          : ``}&{${createStyleString(cssProps, i, config.remBase)}}${i !== 0 ? `}` : ""}`).join("");
-  const pseudo = Object.entries(pseudoProps).map(([k, v]) => config.breakpoints.map((bp, i) => createStyleString(v, i, config.remBase)
+          : ``}&{${createStyleString(cssProps, i, config)}}${i !== 0 ? `}` : ""}`).join("");
+  const pseudo = Object.entries(pseudoProps).map(([k, v]) => breakpoints.map((bp, i) => createStyleString(v, i, config)
     && `${i !== 0
           ? `@media screen and (min-width: ${bp}px){`
-          : ``}${pseudoSelectors[k]}{${createStyleString(v, i, config.remBase)}}${i !== 0 ? `}` : ""}`).join("")).join("");
+          : ``}${pseudoSelectors[k]}{${createStyleString(v, i, config)}}${i !== 0 ? `}` : ""}`).join("")).join("");
   const id = (base + pseudo) !== "" ? String(hashString(base + pseudo)) : undefined;
   let style = (base + pseudo).replace(/&/g, `.jsx-${id}`);
   if (props._forwardSelector && props._forwardSelector.selector) {
