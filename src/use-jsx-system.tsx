@@ -713,11 +713,11 @@ function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, { remBas
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useJsxSystem(props: any, config?: ConfigProps): { id?: string; styles?: string; filteredProps? } {
   
-  if (!config.breakpoints) config.breakpoints = defaultConfig.breakpoints;
-  if (!config.remBase) config.remBase = defaultConfig.remBase;
-  if (!config.space) config.space = defaultConfig.space;
-  if (!config.fontSize) config.fontSize = defaultConfig.fontSize;
-  const {breakpoints} = config
+  if (!("breakpoints" in config)) config.breakpoints = defaultConfig.breakpoints;
+  if (!("remBase" in config)) config.remBase = defaultConfig.remBase;
+  if (!("space" in config)) config.space = defaultConfig.space;
+  if (!("fontSize" in config)) config.fontSize = defaultConfig.fontSize;
+  const { breakpoints } = config;
   
   const filteredProps = useMemo(() => Object.entries(props).reduce((a, [k, v]) => {
     if (cssSelectors[k] === undefined && pseudoSelectors[k] === undefined) {
