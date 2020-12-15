@@ -217,7 +217,14 @@ export type PseudoSelectorProps = {
 
 export type CssProps = LayoutProps & PseudoSelectorProps
 
-const defaultConfig = {
+export type ConfigProps = {
+  space?: number[]
+  fontSize?: number[]
+  breakpoints?: number[]
+  remBase?: number
+}
+
+const defaultConfig: ConfigProps = {
   space: [0, 4, 8, 12, 16, 24, 32, 36, 64],
   fontSize: [0, 12, 14, 16, 20, 24, 32, 48, 64],
   breakpoints: [0, 600, 900, 1200],
@@ -634,7 +641,7 @@ const pseudoSelectors = {
   _visited: "&:visited"
 };
 
-function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, { remBase, ...cfg }): string {
+function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, { remBase, ...cfg }: ConfigProps): string {
   function toCssProperty(JsSyntax: string): string {
     return JsSyntax.replace(/([A-Z])/g, `-$1`).toLowerCase();
   }
@@ -704,13 +711,14 @@ function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, { remBas
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function useJsxSystem(props: any, {
-  breakpoints = defaultConfig.breakpoints,
-  remBase = defaultConfig.remBase,
-  space = defaultConfig.space,
-  fontSize = defaultConfig.fontSize
-}): { id?: string; styles?: string; filteredProps? } {
-  const config = { space, fontSize, breakpoints, remBase };
+export function useJsxSystem(props: any, config?: ConfigProps): { id?: string; styles?: string; filteredProps? } {
+  
+  if (!config.breakpoints) config.breakpoints = defaultConfig.breakpoints;
+  if (!config.remBase) config.remBase = defaultConfig.remBase;
+  if (!config.space) config.space = defaultConfig.space;
+  if (!config.fontSize) config.fontSize = defaultConfig.fontSize;
+  const {breakpoints} = config
+  
   const filteredProps = useMemo(() => Object.entries(props).reduce((a, [k, v]) => {
     if (cssSelectors[k] === undefined && pseudoSelectors[k] === undefined) {
       return { ...a, [k]: v };
