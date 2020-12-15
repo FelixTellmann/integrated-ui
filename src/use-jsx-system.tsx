@@ -711,7 +711,7 @@ function createStyleString(parsedCssProps: LayoutProps, breakpoint = 0, { remBas
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function useJsxSystem(props: any, config?: ConfigProps): { id?: string; styles?: string; filteredProps? } {
+export function useJsxSystem(props: any, config: ConfigProps = {}): { id?: string; styles?: string; filteredProps? } {
   
   if (!("breakpoints" in config)) config.breakpoints = defaultConfig.breakpoints;
   if (!("remBase" in config)) config.remBase = defaultConfig.remBase;
