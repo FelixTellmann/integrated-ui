@@ -741,11 +741,11 @@ export function useJsxSystem(props: any, config: ConfigProps = {}): { id?: strin
   const base = breakpoints.map((bp, i) => createStyleString(cssProps, i, config)
     && `${i !== 0
           ? `@media screen and (min-width: ${bp}px){`
-          : ``}&{${createStyleString(cssProps, i, config)}}${i !== 0 ? `}` : ""}`).join("");
+          : ""}&{${createStyleString(cssProps, i, config)}}${i !== 0 ? `}` : ""}`).join("");
   const pseudo = Object.entries(pseudoProps).map(([k, v]) => breakpoints.map((bp, i) => createStyleString(v, i, config)
     && `${i !== 0
           ? `@media screen and (min-width: ${bp}px){`
-          : ``}${pseudoSelectors[k]}{${createStyleString(v, i, config)}}${i !== 0 ? `}` : ""}`).join("")).join("");
+          : ""}${pseudoSelectors[k]}{${createStyleString(v, i, config)}}${i !== 0 ? `}` : ""}`).join("")).join("");
   const id = (base + pseudo) !== "" ? String(hashString(base + pseudo)) : undefined;
   let style = (base + pseudo).replace(/&/g, `.jsx-${id}`);
   if (props._forwardSelector && props._forwardSelector.selector) {
