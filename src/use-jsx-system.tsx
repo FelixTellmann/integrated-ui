@@ -749,7 +749,7 @@ export function useJsxSystem(props: any, config: ConfigProps = {}): { id?: strin
   const id = (base + pseudo) !== "" ? String(hashString(base + pseudo)) : undefined;
   let style = (base + pseudo).replace(/&/g, `.jsx-${id}`);
   if (props._forwardSelector && props._forwardSelector.selector) {
-    style = style.replace(/~/g, props._forwardSelector.selector);
+    style = style.replace(/~/g, props._forwardSelector.selector).replace(/&/g, `.jsx-${id}`);
   }
   
   return { id: id || undefined, styles: id ? style : undefined, filteredProps };
